@@ -1,0 +1,8 @@
+.DS_Store
+*.log
+
+# Local migration safety copies.
+_migration-backups/
+
+# Large/generated app config currently kept outside the dotfiles repo.
+/.config/

@@ -1,0 +1,5 @@
+background = #1a1b26
+
+# Keep macOS clipboard shortcuts explicit for tmux/Codex workflows.
+keybind = super+c=copy_to_clipboard:mixed
+keybind = super+v=paste_from_clipboard

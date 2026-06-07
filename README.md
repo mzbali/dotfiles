@@ -6,6 +6,7 @@ Personal shell, editor, and workflow configuration managed with GNU Stow.
 
 ```text
 nvim/.config/nvim/
+ghostty/.config/ghostty/config
 zsh/.zshrc
 tmux/.tmux.conf
 bin/.local/bin/tmux-sessioniser
@@ -15,7 +16,7 @@ bin/.local/bin/tmux-sessioniser
 
 ```bash
 cd ~/.dotfiles
-stow nvim zsh tmux bin
+stow nvim ghostty zsh tmux bin
 ```
 
 ## Workflow Notes

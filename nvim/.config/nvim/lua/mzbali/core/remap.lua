@@ -51,17 +51,6 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 -- vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>");
 -- vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
 
--- Copilot tab suggestion
-vim.keymap.set("i", '<Tab>', function()
-    if require("copilot.suggestion").is_visible() then
-        require("copilot.suggestion").accept()
-    else
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
-    end
-end, {
-    silent = true,
-})
-
 -- Lazy sync
 vim.keymap.set("n", "<leader><leader>", "<cmd>Lazy sync<CR>")
 

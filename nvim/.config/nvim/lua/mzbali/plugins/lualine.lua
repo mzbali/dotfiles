@@ -4,7 +4,7 @@ return {
     config = function()
         require('lualine').setup {
             sections = {
-                lualine_x = { 'copilot', 'encoding', { "fileformat", symbols = { unix = "" } }, 'filetype' }, -- I added copilot here
+                lualine_x = { 'encoding', { "fileformat", symbols = { unix = "" } }, 'filetype' },
             }
         }
     end

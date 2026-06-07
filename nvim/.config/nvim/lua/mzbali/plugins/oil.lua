@@ -15,7 +15,7 @@ return {
                 ["<C-t>"] = "actions.select_tab",
                 ["<C-p>"] = false,--"actions.preview",
                 ["<C-c>"] = "actions.close",
-                ["<C-l>"] = false, --"actions.refresh",
+                ["<C-l>"] = "actions.refresh",
                 ["-"] = "actions.parent",
                 ["_"] = "actions.open_cwd",
                 ["`"] = "actions.cd",
@@ -24,6 +24,9 @@ return {
                 ["gx"] = "actions.open_external",
                 ["g."] = "actions.toggle_hidden",
                 ["g\\"] = "actions.toggle_trash",
+            },
+            view_options = {
+                show_hidden = true,
             },
         })
     end

@@ -18,7 +18,7 @@ return {
                 ensure_installed = {
                     "lua_ls", "pyright", "bashls", "dockerls",
                     "docker_compose_language_service", "ts_ls",
-                    "eslint", "jsonls", "rust_analyzer",
+                    "eslint", "jsonls", "html", "rust_analyzer",
                 },
                 automatic_installation = true,
             })
@@ -50,6 +50,11 @@ return {
             -- Roslyn specific config
             vim.lsp.config("roslyn", {
                 capabilities = require("cmp_nvim_lsp").default_capabilities(),
+                on_attach = function(client, bufnr)
+                    if vim.bo[bufnr].filetype == "razor" then
+                        client.server_capabilities.semanticTokensProvider = nil
+                    end
+                end,
                 settings = {
                     ["csharp|inlay_hints"] = {
                         csharp_enable_inlay_hints_for_implicit_object_creation = true,
@@ -67,7 +72,7 @@ return {
             -- Standard servers loop
             local servers = {
                 "pyright", "bashls", "dockerls", "docker_compose_language_service",
-                "ts_ls", "eslint", "jsonls", "rust_analyzer",
+                "ts_ls", "eslint", "jsonls", "html", "rust_analyzer",
             }
 
             for _, server in ipairs(servers) do
@@ -78,9 +83,12 @@ return {
     },
     {
         "seblyng/roslyn.nvim",
-        ft = "cs",
+        ft = { "cs", "razor", "cshtml" },
         opts = {
-            broad_search = true,
+            broad_search = false,
+            extensions = {
+                razor = { enabled = false },
+            },
         },
         config = function(_, opts)
             require("roslyn").setup(opts)

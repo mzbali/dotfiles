@@ -50,11 +50,6 @@ return {
             -- Roslyn specific config
             vim.lsp.config("roslyn", {
                 capabilities = require("cmp_nvim_lsp").default_capabilities(),
-                on_attach = function(client, bufnr)
-                    if vim.bo[bufnr].filetype == "razor" then
-                        client.server_capabilities.semanticTokensProvider = nil
-                    end
-                end,
                 settings = {
                     ["csharp|inlay_hints"] = {
                         csharp_enable_inlay_hints_for_implicit_object_creation = true,
@@ -86,9 +81,6 @@ return {
         ft = { "cs", "razor", "cshtml" },
         opts = {
             broad_search = false,
-            extensions = {
-                razor = { enabled = false },
-            },
         },
         config = function(_, opts)
             require("roslyn").setup(opts)

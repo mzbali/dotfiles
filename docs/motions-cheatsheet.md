@@ -1,4 +1,23 @@
-# tmux + Neovim + Codex Cheatsheet
+# Keyboard Motions — AeroSpace · tmux · Neovim
+
+## AeroSpace (mod = ⌥ Option)
+
+Workspaces: **1** Claude · **2** Ghostty · **3** Firefox · **4** Obsidian · **5–9** free
+
+| Keys | Action |
+|---|---|
+| `⌥1–9` / `⌥⇧1–9` | switch workspace / move window there |
+| `⌥hjkl` / `⌥⇧hjkl` | focus window / move window |
+| `⌥-` / `⌥=` | shrink / grow |
+| `⌥f` · `⌥/` · `⌥⇧space` | fullscreen · split orient · float |
+| `⌥tab` | previous workspace |
+| `⌥⇧;` → `esc` / `r` | service mode → reload / reset layout |
+
+Config: `~/.dotfiles/aerospace/.aerospace.toml`
+
+---
+
+## tmux + Neovim + Codex
 
 This is the working model from the tutorial captions, adapted to your setup:
 

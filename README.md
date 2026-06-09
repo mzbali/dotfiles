@@ -1,24 +1,46 @@
 # Dotfiles
 
-Personal shell, editor, and workflow configuration managed with GNU Stow.
+Managed with **GNU Stow** — each top-level dir is a *package*; `stow <pkg>` symlinks its contents into `~`.
 
-## Layout
+## Packages
 
-```text
-nvim/.config/nvim/
-ghostty/.config/ghostty/config
-zsh/.zshrc
-tmux/.tmux.conf
-bin/.local/bin/tmux-sessioniser
-```
+| Package | What | Links to |
+|---|---|---|
+| `nvim` | editor | `~/.config/nvim/` |
+| `ghostty` | terminal | `~/.config/ghostty/config` |
+| `tmux` | multiplexer | `~/.tmux.conf` |
+| `zsh` | shell | `~/.zshrc` |
+| `aerospace` | tiling WM | `~/.aerospace.toml` |
+| `firefox` | hardened `user.js` | Firefox profile (see Install) |
+| `bin` | scripts | `~/.local/bin/` |
 
 ## Install
 
 ```bash
 cd ~/.dotfiles
-stow nvim ghostty zsh tmux bin
+stow nvim ghostty zsh tmux bin aerospace
+
+# Firefox: profile folder name is machine-specific — check ~/.../Firefox/profiles.ini
+stow --target="$HOME/Library/Application Support/Firefox/Profiles/Y10nADT7.Profile 1" firefox
 ```
 
-## Workflow Notes
+## AeroSpace (mod = `⌥` Option)
 
-- [tmux + Neovim + Codex workflow](docs/tmux-neovim-codex-cheatsheet.md)
+Workspaces: **1** Claude · **2** Ghostty · **3** Firefox · **4** Obsidian · **5–9** free
+
+Full key reference → [docs/motions-cheatsheet.md](docs/motions-cheatsheet.md)
+
+**Pin a new app** — get its bundle id and add a block to `aerospace/.aerospace.toml`:
+```bash
+mdls -name kMDItemCFBundleIdentifier -raw /Applications/<App>.app
+```
+```toml
+[[on-window-detected]]
+if.app-id = '<bundle-id>'
+run = 'move-node-to-workspace <N>'
+```
+
+## See also
+
+- [Motions cheatsheet](docs/motions-cheatsheet.md) — AeroSpace · tmux · Neovim keys in one place
+- macOS settings changed + AeroSpace gotchas → Obsidian `03 Resources/macos/aerospace.md`

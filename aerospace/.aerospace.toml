@@ -1,0 +1,125 @@
+# AeroSpace config — i3/sway-style, the way you'd run it on Arch.
+# mod key = alt  (cmd is reserved by macOS, so alt plays the role of i3's $mod/Super)
+# Docs: https://nikitabobko.github.io/AeroSpace/guide
+# Reload after edits: alt-shift-; then r   (or `aerospace reload-config`)
+
+start-at-login = true
+
+# Keep the window tree tidy (recommended; i3 doesn't do this but it prevents weird nesting)
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+# New windows tile automatically. 'auto' = split along the longer screen edge (i3 default feel).
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+# Don't let the mouse fight you when focus jumps monitors.
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# Hide the macOS accessory/menubar cruft on focus changes — keeps it clean.
+automatically-unhide-macos-hidden-apps = false
+
+# i3-gaps look: uniform 8px around and between windows.
+[gaps]
+inner.horizontal = 8
+inner.vertical   = 8
+outer.left       = 8
+outer.right      = 8
+outer.top        = 8
+outer.bottom     = 8
+
+# ─────────────────────────────────────────────────────────────────────────────
+# AUTO-ASSIGNMENT — each app always opens on its own workspace.
+#   1 = Claude    2 = Ghostty (tmux: nvim + dotnet watch)
+#   3 = Firefox   4 = Obsidian
+#
+# To pin a new app: get its bundle id, then add a block below.
+#   mdls -name kMDItemCFBundleIdentifier -raw /Applications/<App>.app
+# ─────────────────────────────────────────────────────────────────────────────
+[[on-window-detected]]
+if.app-id = 'com.anthropic.claudefordesktop'
+run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'org.mozilla.firefox'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+run = 'move-node-to-workspace 4'
+
+# ─────────────────────────────────────────────────────────────────────────────
+# MAIN MODE — your day-to-day bindings
+# ─────────────────────────────────────────────────────────────────────────────
+[mode.main.binding]
+
+# --- Focus (vim home row) ---
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+# --- Move the focused window within the layout ---
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+
+# --- Resize (smart = grows/shrinks along the split axis) ---
+alt-minus = 'resize smart -50'
+alt-equal = 'resize smart +50'
+alt-shift-0 = 'balance-sizes'          # even out all tiles
+
+# --- Layout controls ---
+alt-slash = 'layout tiles horizontal vertical'      # toggle split orientation
+alt-comma = 'layout accordion horizontal vertical'  # accordion (i3 "tabbed/stacked" feel)
+alt-f     = 'fullscreen'
+alt-shift-space = 'layout floating tiling'          # float/unfloat the focused window
+
+# --- Workspaces: alt+N to switch, alt+shift+N to throw the window there ---
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+
+alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
+alt-shift-2 = ['move-node-to-workspace 2', 'workspace 2']
+alt-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
+alt-shift-4 = ['move-node-to-workspace 4', 'workspace 4']
+alt-shift-5 = ['move-node-to-workspace 5', 'workspace 5']
+alt-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
+alt-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
+alt-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
+alt-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
+
+# --- Quick toggles ---
+alt-tab = 'workspace-back-and-forth'                 # jump to previous workspace (like alt-tab spirit)
+alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'  # send workspace to next monitor
+
+# --- Enter service mode (the "prefix" for less-frequent ops) ---
+alt-shift-semicolon = 'mode service'
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SERVICE MODE — tmux-prefix-style: hit alt-shift-; first, then one key.
+# Everything here returns you to main mode automatically.
+# ─────────────────────────────────────────────────────────────────────────────
+[mode.service.binding]
+esc       = ['reload-config', 'mode main']                 # reload + exit
+r         = ['flatten-workspace-tree', 'mode main']        # reset the layout tree
+f         = ['layout floating tiling', 'mode main']        # toggle float
+backspace = ['close-all-windows-but-current', 'mode main'] # nuke siblings
+
+# Join the focused window into a neighbor (i3-style container building)
+alt-shift-h = ['join-with left', 'mode main']
+alt-shift-j = ['join-with down', 'mode main']
+alt-shift-k = ['join-with up', 'mode main']
+alt-shift-l = ['join-with right', 'mode main']

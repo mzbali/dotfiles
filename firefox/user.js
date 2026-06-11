@@ -24,9 +24,13 @@ user_pref("dom.security.https_only_mode_ever_enabled", true);
 user_pref("security.ssl.require_safe_negotiation", true);
 user_pref("security.tls.enable_0rtt_data", false);
 
-// DNS over HTTPS: use Firefox's default resolver behavior, but avoid silently falling back
-// when a resolver is explicitly configured later.
-user_pref("network.trr.mode", 0);
+// DNS over HTTPS: strict AdGuard Home resolution with no system-DNS fallback.
+// Requires the home LAN or Tailscale to reach the IP-restricted endpoint.
+user_pref("network.trr.mode", 3);
+user_pref("network.trr.uri", "https://adguard.mzbali.co.uk/dns-query");
+user_pref("network.trr.custom_uri", "https://adguard.mzbali.co.uk/dns-query");
+user_pref("network.trr.bootstrapAddr", "192.168.1.101");
+user_pref("network.trr.allow-rfc1918", true);
 
 // Telemetry, studies, sponsored surfaces, and recommendations.
 user_pref("datareporting.healthreport.uploadEnabled", false);

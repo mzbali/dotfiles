@@ -19,7 +19,7 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # Hide the macOS accessory/menubar cruft on focus changes — keeps it clean.
 automatically-unhide-macos-hidden-apps = false
 
-# i3-gaps look: uniform 8px around and between windows.
+# i3-gaps look: uniform 4px around and between windows.
 [gaps]
 inner.horizontal = 4
 inner.vertical   = 4
@@ -31,7 +31,7 @@ outer.bottom     = 4
 # ─────────────────────────────────────────────────────────────────────────────
 # AUTO-ASSIGNMENT — each app always opens on its own workspace.
 #   1 = Claude    2 = Ghostty (tmux: nvim + dotnet watch)
-#   3 = Firefox   4 = Obsidian
+#   3 = Firefox   4 = Obsidian    9 = Codex
 #
 # To pin a new app: get its bundle id, then add a block below.
 #   mdls -name kMDItemCFBundleIdentifier -raw /Applications/<App>.app
@@ -39,6 +39,10 @@ outer.bottom     = 4
 [[on-window-detected]]
 if.app-id = 'com.anthropic.claudefordesktop'
 run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+if.app-id = 'com.openai.codex'
+run = 'move-node-to-workspace 9'
 
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'

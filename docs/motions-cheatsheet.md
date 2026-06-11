@@ -2,7 +2,7 @@
 
 ## AeroSpace (mod = ⌥ Option)
 
-Workspaces: **1** Claude · **2** Ghostty · **3** Firefox · **4** Obsidian · **5–9** free
+Workspaces: **1** Claude · **2** Ghostty · **3** Firefox · **4** Obsidian · **5–8** free · **9** Codex
 
 | Keys | Action |
 |---|---|

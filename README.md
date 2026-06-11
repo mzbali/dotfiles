@@ -26,7 +26,7 @@ stow --target="$HOME/Library/Application Support/Firefox/Profiles/Y10nADT7.Profi
 
 ## AeroSpace (mod = `⌥` Option)
 
-Workspaces: **1** Claude · **2** Ghostty · **3** Firefox · **4** Obsidian · **5–9** free
+Workspaces: **1** Claude · **2** Ghostty · **3** Firefox · **4** Obsidian · **5–8** free · **9** Codex
 
 Full key reference → [docs/motions-cheatsheet.md](docs/motions-cheatsheet.md)
 

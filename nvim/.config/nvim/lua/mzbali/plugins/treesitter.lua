@@ -5,7 +5,7 @@ return {
     build = ":TSUpdate",
     config = function()
         local parsers = {
-            "c_sharp", "lua", "python", "bash", "dockerfile",
+            "c_sharp", "rust", "lua", "python", "bash", "dockerfile",
             "javascript", "typescript", "tsx",
             "markdown", "markdown_inline",
             "json", "html", "css", "yaml", "razor",

@@ -56,6 +56,14 @@ run = 'move-node-to-workspace 3'
 if.app-id = 'md.obsidian'
 run = 'move-node-to-workspace 4'
 
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'cc.ffitch.shottr'
+run = 'layout floating'
+
 # ─────────────────────────────────────────────────────────────────────────────
 # MAIN MODE — your day-to-day bindings
 # ─────────────────────────────────────────────────────────────────────────────

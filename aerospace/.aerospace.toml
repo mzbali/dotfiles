@@ -107,7 +107,6 @@ alt-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
 
 # --- Quick toggles ---
 alt-tab = 'workspace-back-and-forth'                 # jump to previous workspace (like alt-tab spirit)
-alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'  # send workspace to next monitor
 
 # --- Enter service mode (the "prefix" for less-frequent ops) ---
 alt-shift-semicolon = 'mode service'
@@ -121,6 +120,35 @@ esc       = ['reload-config', 'mode main']                 # reload + exit
 r         = ['flatten-workspace-tree', 'mode main']        # reset the layout tree
 f         = ['layout floating tiling', 'mode main']        # toggle float
 backspace = ['close-all-windows-but-current', 'mode main'] # nuke siblings
+
+# Monitor profiles. DELL.* matches the connected DELL S2722QC display.
+# Docked: Ghostty/tmux (2) stays on the MacBook; the other workspaces use the Dell.
+d = [
+    'move-workspace-to-monitor --workspace 1 DELL.*',
+    'move-workspace-to-monitor --workspace 2 built-in',
+    'move-workspace-to-monitor --workspace 3 DELL.*',
+    'move-workspace-to-monitor --workspace 4 DELL.*',
+    'move-workspace-to-monitor --workspace 5 DELL.*',
+    'move-workspace-to-monitor --workspace 6 DELL.*',
+    'move-workspace-to-monitor --workspace 7 DELL.*',
+    'move-workspace-to-monitor --workspace 8 DELL.*',
+    'move-workspace-to-monitor --workspace 9 DELL.*',
+    'mode main',
+]
+
+# Laptop: return every workspace to the built-in display before or after undocking.
+l = [
+    'move-workspace-to-monitor --workspace 1 built-in',
+    'move-workspace-to-monitor --workspace 2 built-in',
+    'move-workspace-to-monitor --workspace 3 built-in',
+    'move-workspace-to-monitor --workspace 4 built-in',
+    'move-workspace-to-monitor --workspace 5 built-in',
+    'move-workspace-to-monitor --workspace 6 built-in',
+    'move-workspace-to-monitor --workspace 7 built-in',
+    'move-workspace-to-monitor --workspace 8 built-in',
+    'move-workspace-to-monitor --workspace 9 built-in',
+    'mode main',
+]
 
 # Join the focused window into a neighbor (i3-style container building)
 alt-shift-h = ['join-with left', 'mode main']

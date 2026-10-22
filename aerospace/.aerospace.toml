@@ -3,7 +3,9 @@
 # Docs: https://nikitabobko.github.io/AeroSpace/guide
 # Reload after edits: alt-shift-; then r   (or `aerospace reload-config`)
 
+config-version = 2
 start-at-login = true
+persistent-workspaces = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
 # Keep the window tree tidy (recommended; i3 doesn't do this but it prevents weird nesting)
 enable-normalization-flatten-containers = true
@@ -19,6 +21,18 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # Hide the macOS accessory/menubar cruft on focus changes — keeps it clean.
 automatically-unhide-macos-hidden-apps = false
 
+# Use the Dell whenever connected; fall back to the laptop when undocked.
+[workspace-to-monitor-force-assignment]
+1 = ['DELL.*', 'built-in']
+2 = ['DELL.*', 'built-in']
+3 = ['DELL.*', 'built-in']
+4 = ['DELL.*', 'built-in']
+5 = ['DELL.*', 'built-in']
+6 = ['DELL.*', 'built-in']
+7 = ['DELL.*', 'built-in']
+8 = ['DELL.*', 'built-in']
+9 = ['DELL.*', 'built-in']
+
 # i3-gaps look: uniform 4px around and between windows.
 [gaps]
 inner.horizontal = 4
@@ -30,19 +44,19 @@ outer.bottom     = 4
 
 # ─────────────────────────────────────────────────────────────────────────────
 # AUTO-ASSIGNMENT — each app always opens on its own workspace.
-#   1 = Claude    2 = Ghostty (tmux: nvim + dotnet watch)
-#   3 = Firefox   4 = Obsidian    9 = Codex
+#   1 = Codex     2 = Ghostty (tmux: nvim + dotnet watch)
+#   3 = Firefox   4 = Obsidian    9 = Claude
 #
 # To pin a new app: get its bundle id, then add a block below.
 #   mdls -name kMDItemCFBundleIdentifier -raw /Applications/<App>.app
 # ─────────────────────────────────────────────────────────────────────────────
 [[on-window-detected]]
 if.app-id = 'com.anthropic.claudefordesktop'
-run = 'move-node-to-workspace 1'
+run = 'move-node-to-workspace 9'
 
 [[on-window-detected]]
 if.app-id = 'com.openai.codex'
-run = 'move-node-to-workspace 9'
+run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
@@ -129,34 +143,9 @@ r         = ['flatten-workspace-tree', 'mode main']        # reset the layout tr
 f         = ['layout floating tiling', 'mode main']        # toggle float
 backspace = ['close-all-windows-but-current', 'mode main'] # nuke siblings
 
-# Monitor profiles. DELL.* matches the connected DELL S2722QC display.
-# Docked: Ghostty/tmux (2) stays on the MacBook; the other workspaces use the Dell.
-d = [
-    'move-workspace-to-monitor --workspace 1 DELL.*',
-    'move-workspace-to-monitor --workspace 2 built-in',
-    'move-workspace-to-monitor --workspace 3 DELL.*',
-    'move-workspace-to-monitor --workspace 4 DELL.*',
-    'move-workspace-to-monitor --workspace 5 DELL.*',
-    'move-workspace-to-monitor --workspace 6 DELL.*',
-    'move-workspace-to-monitor --workspace 7 DELL.*',
-    'move-workspace-to-monitor --workspace 8 DELL.*',
-    'move-workspace-to-monitor --workspace 9 DELL.*',
-    'mode main',
-]
-
-# Laptop: return every workspace to the built-in display before or after undocking.
-l = [
-    'move-workspace-to-monitor --workspace 1 built-in',
-    'move-workspace-to-monitor --workspace 2 built-in',
-    'move-workspace-to-monitor --workspace 3 built-in',
-    'move-workspace-to-monitor --workspace 4 built-in',
-    'move-workspace-to-monitor --workspace 5 built-in',
-    'move-workspace-to-monitor --workspace 6 built-in',
-    'move-workspace-to-monitor --workspace 7 built-in',
-    'move-workspace-to-monitor --workspace 8 built-in',
-    'move-workspace-to-monitor --workspace 9 built-in',
-    'mode main',
-]
+# Reapply automatic monitor assignments after docking or undocking.
+d = ['reload-config', 'mode main']
+l = ['reload-config', 'mode main']
 
 # Join the focused window into a neighbor (i3-style container building)
 alt-shift-h = ['join-with left', 'mode main']

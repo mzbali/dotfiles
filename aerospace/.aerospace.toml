@@ -44,8 +44,8 @@ outer.bottom     = 4
 
 # ─────────────────────────────────────────────────────────────────────────────
 # AUTO-ASSIGNMENT — each app always opens on its own workspace.
-#   1 = Codex     2 = Ghostty (tmux: nvim + dotnet watch)
-#   3 = Firefox   4 = Obsidian    9 = Claude
+#   1 = T3 Code   2 = Ghostty (tmux: nvim + dotnet watch)
+#   3 = Firefox   4 = Obsidian    6 = NaviBeat (floating)   9 = Claude
 #
 # To pin a new app: get its bundle id, then add a block below.
 #   mdls -name kMDItemCFBundleIdentifier -raw /Applications/<App>.app
@@ -55,7 +55,7 @@ if.app-id = 'com.anthropic.claudefordesktop'
 run = 'move-node-to-workspace 9'
 
 [[on-window-detected]]
-if.app-id = 'com.openai.codex'
+if.app-id = 'com.t3tools.t3code'
 run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
@@ -69,6 +69,10 @@ run = 'move-node-to-workspace 3'
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
 run = 'move-node-to-workspace 4'
+
+[[on-window-detected]]
+if.app-id = 'app.navibeat.NaviBeatApp'
+run = ['layout floating', 'move-node-to-workspace 6']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
